@@ -36,4 +36,4 @@ def blog_detail(request, pk):
         "post": post,
         "comments": comments,
     }
-    return render(request, "MathTEMATICA/detail.html", context)
+    return render(request, "MathTEMATIKA/detail.html", context)
