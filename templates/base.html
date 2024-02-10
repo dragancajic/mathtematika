@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MathTEMATIKA Blog</title>
+    <style>
+        footer p {
+            text-align: center;
+        }
+    </style>
+</head>
+<body>
+    <h1>MathTEMATIKA Blog</h1>
+    <a href="{% url 'blog_index' %}">ПОЧЕТНА</a>
+    {% block page_title %}{% endblock page_title %}
+    {% block page_content %}{% endblock page_content %}
+    <footer>
+        <hr>
+        <p>
+            <strong><em>2024</em></strong>
+            | Информационе технологије (<em>IT</em>) и друштво @ <strong>ПМФ БЛ</strong>
+        </p>
+    </footer>
+</body>
+</html>
