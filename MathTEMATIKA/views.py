@@ -17,7 +17,7 @@ def blog_index(request):
 # излистај све постове за одређену категорију
 def blog_category(request, category):
     posts = Post.objects.filter(
-        categories__names__contains = category
+        categories__name__contains = category
     ).order_by("-created_on")
 
     context = {
