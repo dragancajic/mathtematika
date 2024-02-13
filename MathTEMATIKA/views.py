@@ -1,5 +1,9 @@
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
+
+from MathTEMATIKA.forms import CommentForm
 from MathTEMATIKA.models import Post, Comment
+
 
 # Create your views here.
 
@@ -17,7 +21,7 @@ def blog_index(request):
 # излистај све постове за одређену категорију
 def blog_category(request, category):
     posts = Post.objects.filter(
-        categories__name__contains = category
+        categories__name__contains=category
     ).order_by("-created_on")
 
     context = {
@@ -29,11 +33,26 @@ def blog_category(request, category):
 
 # прикажи читав садржај поста -- све детаље
 def blog_detail(request, pk):
-    post = Post.objects.get(pk = pk)
-    comments = Comment.objects.filter(post = post)
+    post = Post.objects.get(pk=pk)
+    form = CommentForm()  # направи "празну" форму/образац за попуњавање :-)
+
+    if request.method == "POST":
+        form = CommentForm(request.POST)
+
+        if form.is_valid():
+            comment = Comment(
+                author=form.cleaned_data["author"],
+                body=form.cleaned_data["body"],
+                post=post,
+            )
+            comment.save()
+            return HttpResponseRedirect(request.path_info)
+
+    comments = Comment.objects.filter(post=post)
 
     context = {
         "post": post,
         "comments": comments,
+        "form": CommentForm(),
     }
     return render(request, "MathTEMATIKA/detail.html", context)
