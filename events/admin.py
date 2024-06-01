@@ -1,5 +1,5 @@
 from django.contrib import admin
-from MathTEMATIKA.models import Category, Post, Comment
+from events.models import Category, Post, Comment
 
 # Register your models here.
 class CategoryAdmin(admin.ModelAdmin):

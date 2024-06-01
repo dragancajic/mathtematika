@@ -1,8 +1,8 @@
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
-from MathTEMATIKA.forms import CommentForm
-from MathTEMATIKA.models import Post, Comment
+from events.forms import CommentForm
+from events.models import Post, Comment
 
 
 # Create your views here.

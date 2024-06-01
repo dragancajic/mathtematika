@@ -38,8 +38,12 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
 
-    # `MathTEMATIKA` апликација
-    'MathTEMATIKA',
+    # ОВДЈЕ МОЖЕТЕ РЕГИСТРОВАТИ ВАШЕ АПЛИКАЦИЈЕ,
+    # нпр.
+    # `MathTEMATIKA` апликација <-- не постоји више!
+    # него је `MathTEMATIKA` постала ---> `events` √
+    'events',
+    'tourism.apps.TourismConfig',  # `tourism` апликација
 ]
 
 MIDDLEWARE = [
@@ -110,7 +114,8 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = "en-us"
 
-TIME_ZONE = "UTC"
+#TIME_ZONE = "UTC"
+TIME_ZONE = "Europe/Sarajevo"
 
 USE_I18N = True
 

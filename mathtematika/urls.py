@@ -14,10 +14,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from django.conf import settings
 from django.contrib import admin
 from django.urls import path, include
+from django.views.generic import RedirectView
 
+# use `include()` to add paths from the `tourism` application
 urlpatterns = [
     path("admin/", admin.site.urls),
-    path("", include("MathTEMATIKA.urls")),
+    #path("", include("events.urls")),
+    path("tourism/", include('tourism.urls')),
+
+    # преусмјери корјени (енгл. root) URL сајта на --> 'tourism/'
+    path('', RedirectView.as_view(url='tourism/', permanent=True)),
+
+    # Use static() to add URL mapping to serve static files during development (only)!
+    # укључи подешавања веб сервера за рад са непромјенљивим/статичним
+    # (енгл. static) датотекама (CSS, JavaScript, images)
+    # static(settings.STATIC_URL, document_root=settings.STATIC_ROOT),
 ]

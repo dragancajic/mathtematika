@@ -44,7 +44,7 @@ class Migration(migrations.Migration):
                 (
                     "categories",
                     models.ManyToManyField(
-                        related_name="posts", to="MathTEMATIKA.category"
+                        related_name="posts", to="events.category"
                     ),
                 ),
             ],
@@ -69,7 +69,7 @@ class Migration(migrations.Migration):
                     models.ForeignKey(
                         on_delete=django.db.models.deletion.CASCADE,
                         related_name="comments",
-                        to="MathTEMATIKA.post",
+                        to="events.post",
                     ),
                 ),
             ],
