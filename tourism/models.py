@@ -16,12 +16,17 @@ class Location(models.Model):
     """
 
     name = models.CharField(
-        max_length=20,
+        max_length=30,  # `Grad Istocno Sarajevo` -> 21 слово! ;-)
         unique=True,  # име туристичке дестинације је јединствено (case-sensitive!)
         help_text='Туристичке \
-<a href="https://turizamrs.org/destinacije/">дестинације</a> Републике Српске',
+<a href="https://turizamrs.org/destinacije/" target="_blank">дестинације</a> Републике Српске',
     )
-    po_box = models.CharField(max_length=5)
+    po_box = models.CharField(
+        max_length=5,
+        verbose_name='PO Box',
+        null=True,  # ово чак и не треба, јер постоји подразумјевана вриједност `00000` !!!
+        default='00000'
+    )
 
     def __str__(self):
         """Стринг који представља на читљив људима начин објекат модела."""
@@ -48,12 +53,13 @@ class Preference(models.Model):
     user = models.ForeignKey(
         "User", on_delete=models.CASCADE, related_name="preferences"
     )
-    food = models.CharField(max_length=30, null=True)
-    drink = models.CharField(max_length=30, null=True)
-    entertainment = models.CharField(max_length=30, null=True)
-    recreation = models.CharField(max_length=30, null=True)
-    sport = models.CharField(max_length=30, null=True)
-    hobby = models.CharField(max_length=50, null=True)
+    # да би поље било НЕОБАВЕЗНО ТРЕБА додати `blank=True` !!!
+    food = models.CharField(max_length=30, null=True, blank=True)
+    drink = models.CharField(max_length=30, null=True, blank=True)
+    entertainment = models.CharField(max_length=30, null=True, blank=True)
+    recreation = models.CharField(max_length=30, null=True, blank=True)
+    sport = models.CharField(max_length=30, null=True, blank=True)
+    hobby = models.CharField(max_length=50, null=True, blank=True)
     comment = models.TextField(max_length=1000, default="Још увијек нема коментара")
 
     def __str__(self):
@@ -68,9 +74,9 @@ class User(models.Model):
     name = models.CharField(
         max_length=50, help_text="Ваше име или надимак, по жељи! :-)"
     )
-    email = models.EmailField(null=True)
-    region = models.CharField(max_length=20)
-    state = models.CharField(max_length=50, null=True)
+    email = models.EmailField(null=True, blank=True)
+    region = models.CharField(max_length=50)
+    state = models.CharField(max_length=50, null=True, blank=True)
 
     def __str__(self):
         return f"{self.name} from {self.region}"
